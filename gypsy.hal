@@ -361,3 +361,10 @@ net tool-change-confirmed   =>  iocontrol.0.tool-changed
 net tool-prepare-request    <=  iocontrol.0.tool-prepare
 net tool-prepare-confirmed  =>  iocontrol.0.tool-prepared
 
+
+loadusr -W scaragui
+
+net j0 axis.0.joint-pos-fb scaragui.joint0
+net j1 axis.1.joint-pos-fb scaragui.joint1
+net j2 axis.2.joint-pos-fb scaragui.joint2
+net j3 axis.3.joint-pos-fb scaragui.joint3
