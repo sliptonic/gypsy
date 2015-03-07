@@ -12,6 +12,10 @@ loadrt hm2_pci config=" num_encoders=6 num_pwmgens=0 num_3pwmgens=0 num_stepgens
 setp     hm2_5i25.0.watchdog.timeout_ns 10000000
 loadrt pid names=pid.x,pid.y,pid.z,pid.a
 
+setp scarakins.D2 [SCARA]ARM0
+setp scarakins.D4 [SCARA]ARM1
+
+
 addf hm2_5i25.0.read servo-thread
 addf motion-command-handler servo-thread
 addf motion-controller servo-thread
