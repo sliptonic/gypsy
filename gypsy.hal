@@ -222,18 +222,18 @@ net min-z     =>  axis.2.neg-lim-sw-in
 net max-home-z     =>  axis.2.pos-lim-sw-in
 
 #*******************
-#  AXIS A
+#  AXIS C - Roll
 #*******************
 
-setp   pid.a.Pgain     [AXIS_3]P
-setp   pid.a.Igain     [AXIS_3]I
-setp   pid.a.Dgain     [AXIS_3]D
-setp   pid.a.bias      [AXIS_3]BIAS
-setp   pid.a.FF0       [AXIS_3]FF0
-setp   pid.a.FF1       [AXIS_3]FF1
-setp   pid.a.FF2       [AXIS_3]FF2
-setp   pid.a.deadband  [AXIS_3]DEADBAND
-setp   pid.a.maxoutput [AXIS_3]MAX_OUTPUT
+setp   pid.a.Pgain     [AXIS_5]P
+setp   pid.a.Igain     [AXIS_5]I
+setp   pid.a.Dgain     [AXIS_5]D
+setp   pid.a.bias      [AXIS_5]BIAS
+setp   pid.a.FF0       [AXIS_5]FF0
+setp   pid.a.FF1       [AXIS_5]FF1
+setp   pid.a.FF2       [AXIS_5]FF2
+setp   pid.a.deadband  [AXIS_5]DEADBAND
+setp   pid.a.maxoutput [AXIS_5]MAX_OUTPUT
 
 net a-index-enable  <=>  pid.a.index-enable
 net a-enable       => pid.a.enable
@@ -244,9 +244,9 @@ net a-pos-fb       => pid.a.feedback
 
 # ---PWM Generator signals/setup---
 
-setp   hm2_5i25.0.7i77.0.1.analogout3-scalemax  [AXIS_3]OUTPUT_SCALE
-setp   hm2_5i25.0.7i77.0.1.analogout3-minlim    [AXIS_3]OUTPUT_MIN_LIMIT
-setp   hm2_5i25.0.7i77.0.1.analogout3-maxlim    [AXIS_3]OUTPUT_MAX_LIMIT
+setp   hm2_5i25.0.7i77.0.1.analogout3-scalemax  [AXIS_5]OUTPUT_SCALE
+setp   hm2_5i25.0.7i77.0.1.analogout3-minlim    [AXIS_5]OUTPUT_MIN_LIMIT
+setp   hm2_5i25.0.7i77.0.1.analogout3-maxlim    [AXIS_5]OUTPUT_MAX_LIMIT
 
 net a-output                             => hm2_5i25.0.7i77.0.1.analogout3
 net a-pos-cmd    axis.3.motor-pos-cmd
@@ -259,7 +259,7 @@ setp    hm2_5i25.0.encoder.03.filter 1
 setp    hm2_5i25.0.encoder.03.index-invert 0
 setp    hm2_5i25.0.encoder.03.index-mask 0
 setp    hm2_5i25.0.encoder.03.index-mask-invert 0
-setp    hm2_5i25.0.encoder.03.scale  [AXIS_3]ENCODER_SCALE
+setp    hm2_5i25.0.encoder.03.scale  [AXIS_5]ENCODER_SCALE
 
 net a-pos-fb               <=  hm2_5i25.0.encoder.03.position
 net a-vel-fb               <=  hm2_5i25.0.encoder.03.velocity
