@@ -3,8 +3,9 @@
 # overwritten when you run PNCconf again
 
 loadrt tp
-loadrt trivkins
-loadrt [EMCMOT]EMCMOT servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[TRAJ]AXES tp=tp kins=trivkins
+#loadrt trivkins
+loadrt scarakins
+loadrt [EMCMOT]EMCMOT servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[TRAJ]AXES tp=tp kins=scarakins
 loadrt probe_parport
 loadrt hostmot2
 loadrt hm2_pci config=" num_encoders=6 num_pwmgens=0 num_3pwmgens=0 num_stepgens=0 sserial_port_0=000xxxxx " 
