@@ -207,18 +207,18 @@ net z-enable     axis.2.amp-enable-out
 
 # ---Encoder feedback signals/setup---
 
-setp    hm2_5i25.0.encoder.02.counter-mode 0
-setp    hm2_5i25.0.encoder.02.filter 1
-setp    hm2_5i25.0.encoder.02.index-invert 0
-setp    hm2_5i25.0.encoder.02.index-mask 0
-setp    hm2_5i25.0.encoder.02.index-mask-invert 0
-setp    hm2_5i25.0.encoder.02.scale  [AXIS_2]ENCODER_SCALE
+setp    hm2_5i25.0.encoder.03.counter-mode 0
+setp    hm2_5i25.0.encoder.03.filter 1
+setp    hm2_5i25.0.encoder.03.index-invert 0
+setp    hm2_5i25.0.encoder.03.index-mask 0
+setp    hm2_5i25.0.encoder.03.index-mask-invert 0
+setp    hm2_5i25.0.encoder.03.scale  [AXIS_2]ENCODER_SCALE
 
-net z-pos-fb               <=  hm2_5i25.0.encoder.02.position
-net z-vel-fb               <=  hm2_5i25.0.encoder.02.velocity
+net z-pos-fb               <=  hm2_5i25.0.encoder.03.position
+net z-vel-fb               <=  hm2_5i25.0.encoder.03.velocity
 net z-pos-fb               =>  axis.2.motor-pos-fb
-net z-index-enable    axis.2.index-enable  <=>  hm2_5i25.0.encoder.02.index-enable
-net z-pos-rawcounts        <=  hm2_5i25.0.encoder.02.rawcounts
+net z-index-enable    axis.2.index-enable  <=>  hm2_5i25.0.encoder.03.index-enable
+net z-pos-rawcounts        <=  hm2_5i25.0.encoder.03.rawcounts
 
 # ---setup home / limit switch signals---
 
@@ -259,18 +259,18 @@ net a-enable     axis.3.amp-enable-out
 
 # ---Encoder feedback signals/setup---
 
-setp    hm2_5i25.0.encoder.03.counter-mode 0
-setp    hm2_5i25.0.encoder.03.filter 1
-setp    hm2_5i25.0.encoder.03.index-invert 0
-setp    hm2_5i25.0.encoder.03.index-mask 0
-setp    hm2_5i25.0.encoder.03.index-mask-invert 0
-setp    hm2_5i25.0.encoder.03.scale  [AXIS_5]ENCODER_SCALE
+setp    hm2_5i25.0.encoder.02.counter-mode 0
+setp    hm2_5i25.0.encoder.02.filter 1
+setp    hm2_5i25.0.encoder.02.index-invert 0
+setp    hm2_5i25.0.encoder.02.index-mask 0
+setp    hm2_5i25.0.encoder.02.index-mask-invert 0
+setp    hm2_5i25.0.encoder.02.scale  [AXIS_5]ENCODER_SCALE
 
-net a-pos-fb               <=  hm2_5i25.0.encoder.03.position
-net a-vel-fb               <=  hm2_5i25.0.encoder.03.velocity
+net a-pos-fb               <=  hm2_5i25.0.encoder.02.position
+net a-vel-fb               <=  hm2_5i25.0.encoder.02.velocity
 net a-pos-fb               =>  axis.3.motor-pos-fb
-net a-index-enable    axis.3.index-enable  <=>  hm2_5i25.0.encoder.03.index-enable
-net a-pos-rawcounts        <=  hm2_5i25.0.encoder.03.rawcounts
+net a-index-enable    axis.3.index-enable  <=>  hm2_5i25.0.encoder.02.index-enable
+net a-pos-rawcounts        <=  hm2_5i25.0.encoder.02.rawcounts
 
 # ---setup home / limit switch signals---
 
