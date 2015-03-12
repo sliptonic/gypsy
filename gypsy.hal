@@ -34,6 +34,7 @@ net spindle-on hm2_5i25.0.7i77.0.0.output-00
 
 # --- SPINDLE-BRAKE ---
 net spindle-brake hm2_5i25.0.7i77.0.0.output-01
+setp hm2_5i25.0.7i77.0.0.output-01-invert true
 
 # external input signals
 
@@ -62,8 +63,8 @@ net home-a     <=  hm2_5i25.0.7i77.0.0.input-06-not
 # --- HOME-Z ---
 net home-z     <=  hm2_5i25.0.7i77.0.0.input-07-not
 
-# --- MAX-HOME-Z ---
-net max-home-z     <=  hm2_5i25.0.7i77.0.0.input-08-not
+# --- MAX-Z ---
+net max-z     <=  hm2_5i25.0.7i77.0.0.input-08-not
 
 # --- MIN-Z ---
 net min-z     <=  hm2_5i25.0.7i77.0.0.input-09-not
