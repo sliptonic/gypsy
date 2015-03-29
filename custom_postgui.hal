@@ -21,20 +21,20 @@ net j3 pyvcp.joint3
 
 
  # the following does the magic of setting the jog speeds
- net remote-speed-slow or2.0.in0 input.0.btn-trigger
- net remote-speed-medium or2.1.in0 input.0.btn-thumb
- net remote-speed-fast or2.0.in1 or2.1.in1 input.0.btn-thumb2
+# net remote-speed-slow or2.0.in0 input.0.btn-trigger
+# net remote-speed-medium or2.1.in0 input.0.btn-thumb
+# net remote-speed-fast or2.0.in1 or2.1.in1 input.0.btn-thumb2
 
- net joy-speed-1 mux4.0.sel0 <= or2.0.out
- net joy-speed-2 mux4.0.sel1 <= or2.1.out
- net joy-speed-final halui.jog-speed <= mux4.0.out
+# net joy-speed-1 mux4.0.sel0 <= or2.0.out
+# net joy-speed-2 mux4.0.sel1 <= or2.1.out
+# net joy-speed-final halui.jog-speed <= mux4.0.out
 
-net joy-x-jog halui.jog.0.analog <= input.0.abs-z-position 
-net joy-y-jog halui.jog.1.analog <= input.0.abs-hat0x-position 
-net joy-z-jog halui.jog.2.analog <= input.0.abs-hat0y-position 
+#net joy-x-jog halui.jog.0.analog <= input.0.abs-z-position 
+#net joy-y-jog halui.jog.1.analog <= input.0.abs-hat0x-position 
+#net joy-z-jog halui.jog.2.analog <= input.0.abs-hat0y-position 
 
 #setp input.0.abs-z-offset -0.003921569
-setp input.0.abs-z-scale 50.00
-setp input.0.abs-hat0x-scale 0.80
-setp input.0.abs-hat0y-scale 0.40
+#setp input.0.abs-z-scale 50.00
+#setp input.0.abs-hat0x-scale 0.80
+#setp input.0.abs-hat0y-scale 0.40
 
