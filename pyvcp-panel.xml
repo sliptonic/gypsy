@@ -1,7 +1,20 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <pyvcp>
-<!-- 
-Include your PyVCP panel here.
-The contents of this file will not be overwritten when you run stepconf again.
--->
+ <vbox>
+    <label><text>"THETA 0:"</text></label>
+    <meter><size>120</size><halpin>"joint0"</halpin><max_>120</max_><min_>-160</min_></meter>
+ </vbox>
+ <vbox>
+    <label><text>"THETA 1:"</text></label>
+    <meter><size>120</size><halpin>"joint1"</halpin><max_>165</max_><min_>-144</min_></meter>
+ </vbox>
+ <vbox>
+    <label><text>"ZAXIS 2:"</text></label>
+    <meter><size>120</size><halpin>"joint2"</halpin><max_>392</max_><min_>25</min_></meter>
+ </vbox>
+ <vbox>
+    <label><text>"EHHH? 3:"</text></label>
+    <meter><size>100</size><halpin>"joint3"</halpin><max_>180</max_><min_>-180</min_></meter>
+ </vbox>
+
 </pyvcp>
