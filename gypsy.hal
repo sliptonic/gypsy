@@ -10,7 +10,7 @@ loadrt probe_parport
 loadrt hostmot2
 loadrt hm2_pci config=" num_encoders=6 num_pwmgens=0 num_3pwmgens=0 num_stepgens=0 sserial_port_0=000xxxxx " 
 setp     hm2_5i25.0.watchdog.timeout_ns 10000000
-loadrt pid names=pid.x,pid.y,pid.z,pid.c
+loadrt pid names=pid.a,pid.b,pid.z,pid.c
 
 loadusr -W hal_input -KRAL Dual
 
@@ -18,15 +18,15 @@ setp scarakins.D2 [SCARA]ARM0
 setp scarakins.D4 [SCARA]ARM1
 
 
-addf hm2_5i25.0.read servo-thread
-addf motion-command-handler servo-thread
-addf motion-controller servo-thread
-addf pid.x.do-pid-calcs                 servo-thread
-addf pid.y.do-pid-calcs                 servo-thread
+addf hm2_5i25.0.read                    servo-thread
+addf motion-command-handler             servo-thread
+addf motion-controller                  servo-thread
+addf pid.a.do-pid-calcs                 servo-thread
+addf pid.b.do-pid-calcs                 servo-thread
 addf pid.z.do-pid-calcs                 servo-thread
 addf pid.c.do-pid-calcs                 servo-thread
-addf hm2_5i25.0.write         servo-thread
-addf hm2_5i25.0.pet_watchdog  servo-thread
+addf hm2_5i25.0.write                   servo-thread
+addf hm2_5i25.0.pet_watchdog            servo-thread
 
 # external output signals
 
@@ -42,25 +42,25 @@ setp hm2_5i25.0.7i77.0.0.output-01 true
 
 
 # --- MIN-X ---
-net min-x     <=  hm2_5i25.0.7i77.0.0.input-00-not
+net min-a     <=  hm2_5i25.0.7i77.0.0.input-00-not
 
 # --- HOME-X ---
-net home-x     <=  hm2_5i25.0.7i77.0.0.input-01-not
+net home-a     <=  hm2_5i25.0.7i77.0.0.input-01-not
 
 # --- MAX-X ---
-net max-x     <=  hm2_5i25.0.7i77.0.0.input-02-not
+net max-a     <=  hm2_5i25.0.7i77.0.0.input-02-not
 
 # --- MAX-Y ---
-net max-y     <=  hm2_5i25.0.7i77.0.0.input-03-not
+net max-b     <=  hm2_5i25.0.7i77.0.0.input-03-not
 
 # --- MIN-Y ---
-net min-y     <=  hm2_5i25.0.7i77.0.0.input-04-not
+net min-b     <=  hm2_5i25.0.7i77.0.0.input-04-not
 
 # --- HOME-Y ---
-net home-y     <=  hm2_5i25.0.7i77.0.0.input-05-not
+net home-b     <=  hm2_5i25.0.7i77.0.0.input-05-not
 
 # --- HOME-A ---
-net home-a     <=  hm2_5i25.0.7i77.0.0.input-06-not
+net home-c     <=  hm2_5i25.0.7i77.0.0.input-06-not
 
 # --- HOME-Z ---
 net home-z     <=  hm2_5i25.0.7i77.0.0.input-07-not
@@ -75,22 +75,22 @@ net min-z     <=  hm2_5i25.0.7i77.0.0.input-09-not
 #  AXIS X
 #*******************
 
-setp   pid.x.Pgain     [AXIS_0]P
-setp   pid.x.Igain     [AXIS_0]I
-setp   pid.x.Dgain     [AXIS_0]D
-setp   pid.x.bias      [AXIS_0]BIAS
-setp   pid.x.FF0       [AXIS_0]FF0
-setp   pid.x.FF1       [AXIS_0]FF1
-setp   pid.x.FF2       [AXIS_0]FF2
-setp   pid.x.deadband  [AXIS_0]DEADBAND
-setp   pid.x.maxoutput [AXIS_0]MAX_OUTPUT
+setp   pid.a.Pgain     [AXIS_0]P
+setp   pid.a.Igain     [AXIS_0]I
+setp   pid.a.Dgain     [AXIS_0]D
+setp   pid.a.bias      [AXIS_0]BIAS
+setp   pid.a.FF0       [AXIS_0]FF0
+setp   pid.a.FF1       [AXIS_0]FF1
+setp   pid.a.FF2       [AXIS_0]FF2
+setp   pid.a.deadband  [AXIS_0]DEADBAND
+setp   pid.a.maxoutput [AXIS_0]MAX_OUTPUT
 
-net x-index-enable  <=>  pid.x.index-enable
-net x-enable       => pid.x.enable
-net x-output       => pid.x.output
-net x-pos-cmd      => pid.x.command
-net x-vel-fb       => pid.x.feedback-deriv
-net x-pos-fb       => pid.x.feedback
+net a-index-enable  <=>  pid.a.index-enable
+net a-enable       => pid.a.enable
+net a-output       => pid.a.output
+net a-pos-cmd      => pid.a.command
+net a-vel-fb       => pid.a.feedback-deriv
+net a-pos-fb       => pid.a.feedback
 
 # ---PWM Generator signals/setup---
 
@@ -98,11 +98,12 @@ setp   hm2_5i25.0.7i77.0.1.analogout0-scalemax  [AXIS_0]OUTPUT_SCALE
 setp   hm2_5i25.0.7i77.0.1.analogout0-minlim    [AXIS_0]OUTPUT_MIN_LIMIT
 setp   hm2_5i25.0.7i77.0.1.analogout0-maxlim    [AXIS_0]OUTPUT_MAX_LIMIT
 
-net x-output                             => hm2_5i25.0.7i77.0.1.analogout0
-net x-pos-cmd    axis.0.motor-pos-cmd
-net x-enable     axis.0.amp-enable-out
+net a-output                             => hm2_5i25.0.7i77.0.1.analogout0
+net a-pos-cmd    axis.0.motor-pos-cmd
+net a-enable     axis.0.amp-enable-out
 # enable _all_ sserial pwmgens
-net x-enable   hm2_5i25.0.7i77.0.1.analogena
+net a-enable   hm2_5i25.0.7i77.0.1.analogena
+#net spindle-enable   hm2_5i25.0.7i77.0.1.spinena
 
 # ---Encoder feedback signals/setup---
 
@@ -113,38 +114,38 @@ setp    hm2_5i25.0.encoder.00.index-mask 0
 setp    hm2_5i25.0.encoder.00.index-mask-invert 0
 setp    hm2_5i25.0.encoder.00.scale  [AXIS_0]ENCODER_SCALE
 
-net x-pos-fb               <=  hm2_5i25.0.encoder.00.position
-net x-vel-fb               <=  hm2_5i25.0.encoder.00.velocity
-net x-pos-fb               =>  axis.0.motor-pos-fb
-net x-index-enable    axis.0.index-enable  <=>  hm2_5i25.0.encoder.00.index-enable
-net x-pos-rawcounts        <=  hm2_5i25.0.encoder.00.rawcounts
+net a-pos-fb               <=  hm2_5i25.0.encoder.00.position
+net a-vel-fb               <=  hm2_5i25.0.encoder.00.velocity
+net a-pos-fb               =>  axis.0.motor-pos-fb
+net a-index-enable    axis.0.index-enable  <=>  hm2_5i25.0.encoder.00.index-enable
+net a-pos-rawcounts        <=  hm2_5i25.0.encoder.00.rawcounts
 
 # ---setup home / limit switch signals---
 
-net home-x     =>  axis.0.home-sw-in
-net min-x     =>  axis.0.neg-lim-sw-in
-net max-x     =>  axis.0.pos-lim-sw-in
+net home-a     =>  axis.0.home-sw-in
+net min-a     =>  axis.0.neg-lim-sw-in
+net max-a     =>  axis.0.pos-lim-sw-in
 
 #*******************
 #  AXIS Y
 #*******************
 
-setp   pid.y.Pgain     [AXIS_1]P
-setp   pid.y.Igain     [AXIS_1]I
-setp   pid.y.Dgain     [AXIS_1]D
-setp   pid.y.bias      [AXIS_1]BIAS
-setp   pid.y.FF0       [AXIS_1]FF0
-setp   pid.y.FF1       [AXIS_1]FF1
-setp   pid.y.FF2       [AXIS_1]FF2
-setp   pid.y.deadband  [AXIS_1]DEADBAND
-setp   pid.y.maxoutput [AXIS_1]MAX_OUTPUT
+setp   pid.b.Pgain     [AXIS_1]P
+setp   pid.b.Igain     [AXIS_1]I
+setp   pid.b.Dgain     [AXIS_1]D
+setp   pid.b.bias      [AXIS_1]BIAS
+setp   pid.b.FF0       [AXIS_1]FF0
+setp   pid.b.FF1       [AXIS_1]FF1
+setp   pid.b.FF2       [AXIS_1]FF2
+setp   pid.b.deadband  [AXIS_1]DEADBAND
+setp   pid.b.maxoutput [AXIS_1]MAX_OUTPUT
 
-net y-index-enable  <=>  pid.y.index-enable
-net y-enable       => pid.y.enable
-net y-output       => pid.y.output
-net y-pos-cmd      => pid.y.command
-net y-vel-fb       => pid.y.feedback-deriv
-net y-pos-fb       => pid.y.feedback
+net b-index-enable  <=>  pid.b.index-enable
+net b-enable       => pid.b.enable
+net b-output       => pid.b.output
+net b-pos-cmd      => pid.b.command
+net b-vel-fb       => pid.b.feedback-deriv
+net b-pos-fb       => pid.b.feedback
 
 # ---PWM Generator signals/setup---
 
@@ -152,9 +153,9 @@ setp   hm2_5i25.0.7i77.0.1.analogout1-scalemax  [AXIS_1]OUTPUT_SCALE
 setp   hm2_5i25.0.7i77.0.1.analogout1-minlim    [AXIS_1]OUTPUT_MIN_LIMIT
 setp   hm2_5i25.0.7i77.0.1.analogout1-maxlim    [AXIS_1]OUTPUT_MAX_LIMIT
 
-net y-output                             => hm2_5i25.0.7i77.0.1.analogout1
-net y-pos-cmd    axis.1.motor-pos-cmd
-net y-enable     axis.1.amp-enable-out
+net b-output                             => hm2_5i25.0.7i77.0.1.analogout1
+net b-pos-cmd    axis.1.motor-pos-cmd
+net b-enable     axis.1.amp-enable-out
 
 # ---Encoder feedback signals/setup---
 
@@ -165,17 +166,17 @@ setp    hm2_5i25.0.encoder.01.index-mask 0
 setp    hm2_5i25.0.encoder.01.index-mask-invert 0
 setp    hm2_5i25.0.encoder.01.scale  [AXIS_1]ENCODER_SCALE
 
-net y-pos-fb               <=  hm2_5i25.0.encoder.01.position
-net y-vel-fb               <=  hm2_5i25.0.encoder.01.velocity
-net y-pos-fb               =>  axis.1.motor-pos-fb
-net y-index-enable    axis.1.index-enable  <=>  hm2_5i25.0.encoder.01.index-enable
-net y-pos-rawcounts        <=  hm2_5i25.0.encoder.01.rawcounts
+net b-pos-fb               <=  hm2_5i25.0.encoder.01.position
+net b-vel-fb               <=  hm2_5i25.0.encoder.01.velocity
+net b-pos-fb               =>  axis.1.motor-pos-fb
+net b-index-enable    axis.1.index-enable  <=>  hm2_5i25.0.encoder.01.index-enable
+net b-pos-rawcounts        <=  hm2_5i25.0.encoder.01.rawcounts
 
 # ---setup home / limit switch signals---
 
-net home-y     =>  axis.1.home-sw-in
-net min-y     =>  axis.1.neg-lim-sw-in
-net max-y     =>  axis.1.pos-lim-sw-in
+net home-b     =>  axis.1.home-sw-in
+net min-b     =>  axis.1.neg-lim-sw-in
+net max-b     =>  axis.1.pos-lim-sw-in
 
 #*******************
 #  AXIS Z
