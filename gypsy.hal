@@ -12,11 +12,14 @@ loadrt hm2_pci config=" num_encoders=6 num_pwmgens=0 num_3pwmgens=0 num_stepgens
 setp     hm2_5i25.0.watchdog.timeout_ns 10000000
 loadrt pid names=pid.a,pid.b,pid.z,pid.c
 
-loadusr -W hal_input -KRAL Dual
+#loadusr -W hal_input -KRAL Dual
 
+setp scarakins.D1 [SCARA]ARM0VERT
 setp scarakins.D2 [SCARA]ARM0
+setp scarakins.D3 [SCARA]ARM1VERT
 setp scarakins.D4 [SCARA]ARM1
-
+setp scarakins.D5 [SCARA]ENDVOFFSET
+setp scarakins.D6 [SCARA]ENDHOFFSET
 
 addf hm2_5i25.0.read                    servo-thread
 addf motion-command-handler             servo-thread
@@ -371,9 +374,9 @@ net tool-prepare-request    <=  iocontrol.0.tool-prepare
 net tool-prepare-confirmed  =>  iocontrol.0.tool-prepared
 
 
-loadusr -W scaragui
+loadusr -W gypsygui
 
-net j0 axis.0.joint-pos-fb scaragui.joint0
-net j1 axis.1.joint-pos-fb scaragui.joint1
-net j2 axis.2.joint-pos-fb scaragui.joint2
-net j3 axis.3.joint-pos-fb scaragui.joint3
+net j0 axis.0.joint-pos-fb gypsygui.joint0
+net j1 axis.1.joint-pos-fb gypsygui.joint1
+net j2 axis.2.joint-pos-fb gypsygui.joint2
+net j3 axis.3.joint-pos-fb gypsygui.joint3
